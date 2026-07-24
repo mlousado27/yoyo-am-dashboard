@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# raw Simio exports live outside the repo (the big one is ~160 MB); the app runs
+# off the committed data/*.parquet, so raw CSVs are ignored if placed here.
+raw/
+*.csv
+
+# keep data/*.parquet: the app needs them to run
+!data/*.parquet
