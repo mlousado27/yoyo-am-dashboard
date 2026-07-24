@@ -197,26 +197,3 @@ with tab5:
                        S[list(show_cols)].rename(columns=show_cols).to_csv(index=False),
                        file_name="yoyo_scenarios.csv", mime="text/csv")
 
-# ============================ METHOD NOTE ===================================
-with st.expander("Metric definitions & data"):
-    st.markdown(
-        f'''<p class="note">
-        Every design was simulated for one year (240 days × 8 h) and repeated over 10
-        replications.<br><br>
-        <b>Unit cost</b> is Simio's <code>TotalCost</code> response: total annualized system
-        cost per saleable yo-yo, averaged over the 10 replications.<br><br>
-        <b>Lead time</b> is the worst-case order flow time. Inside a single replication it is
-        the <b>maximum</b> time any order spends in the system (arrival, printing,
-        post-processing, assembly, QC), because the "every order under 12 h" promise is a hard
-        guarantee, so the slowest order is what must clear the gate. Each scenario value is the
-        <b>average of that per-run maximum</b> across the 10 replications.<br><br>
-        <b>Feasible</b> means that averaged worst case is below {GATE:.0f} h.<br><br>
-        <b>Cost fields.</b> Each object reports <code>CapitalCost</code>,
-        <code>UsageCostCharged</code> and <code>IdleCost</code>, which sum exactly to its
-        <code>TotalCost</code> (verified for all 300 scenarios). Only the AM printer bank has
-        a capital cost, and it scales only with printer count; every usage cost is billed only
-        while working. The AM printer's usage is energy plus material; the labor stations are
-        wage. This export reports each object's usage as one combined figure, so energy and
-        material are shown together, not split.<br><br>
-        Data: Simio ResponseDetail + ResultsDetail exports, AM_Model SLS/MJF.
-        </p>''', unsafe_allow_html=True)
